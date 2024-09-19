@@ -27,8 +27,21 @@
             <a href="#" class="text-gray-700 hover:text-blue-600">Contact</a>
         </div>
         <div class="hidden md:flex space-x-2">
-            <a href="/login" class="px-4 py-2 text-blue-600 hover:text-blue-700">Login</a>
-            <a href="/signup" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Sign Up</a>
+            @auth()
+                <a href="/profile" class="px-4 py-2 text-blue-600 hover:text-blue-700">Profile</a>
+                <form method="POST" action="/logout">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-blue-700 px-4 py-2 text-white/80 hover:text-blue-700 rounded-sm">
+                        Logout
+                    </button>
+                </form>
+            @endauth
+            @guest()
+                <a href="/login" class="px-4 py-2 text-blue-600 hover:text-blue-700">Login</a>
+                <a href="/signup" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Sign Up</a>
+            @endguest
+
         </div>
         <div class="md:hidden">
             <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600">
@@ -45,8 +58,19 @@
         <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100">About</a>
         <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100">Services</a>
         <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100">Contact</a>
-        <a href="#" class="block py-2 px-4 text-blue-600 hover:bg-gray-100">Login</a>
-        <a href="#" class="block py-2 px-4 text-blue-600 hover:bg-gray-100">Sign Up</a>
+        @auth()
+            <a href="/profile" class="px-4 py-2 text-blue-600 hover:text-blue-700">Profile</a>
+            <form method="POST" action="/logout">
+                @csrf
+                <button type="submit" class="bg-blue-700 px-4 py-2 text-white/80 hover:text-blue-700 rounded-sm">
+                    Logout
+                </button>
+            </form>
+        @endauth
+        @guest()
+            <a href="/login" class="px-4 py-2 text-blue-600 hover:text-blue-700">Login</a>
+            <a href="/signup" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Sign Up</a>
+        @endguest
     </div>
 </header>
 
