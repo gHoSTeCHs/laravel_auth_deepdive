@@ -7,7 +7,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
@@ -18,7 +20,8 @@ class RegisteredUserController extends Controller
         return (view('auth.register'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request): Application|Redirector|RedirectResponse
+    {
         $attributes = $request->validate([
             'name' => ['required'],
             'email' => ['required'],
@@ -26,6 +29,9 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create($attributes);
+
+        event(new Registered($user));
+
         Auth::login($user);
 
         return redirect('/profile');
