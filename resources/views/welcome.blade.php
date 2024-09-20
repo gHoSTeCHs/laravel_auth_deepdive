@@ -39,7 +39,7 @@
             @endauth
             @guest()
                 <a href="/login" class="px-4 py-2 text-blue-600 hover:text-blue-700">Login</a>
-                <a href="/signup" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Sign Up</a>
+                <a href="/register" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Register</a>
             @endguest
 
         </div>

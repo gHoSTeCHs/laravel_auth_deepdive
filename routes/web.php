@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -17,5 +18,9 @@ Route::post('/login', [SessionController::class, 'store']);
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/profile', [ProfileController::class, 'update'])->middleware('auth');
+
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+});
 
 Route::delete('/logout', [SessionController::class, 'destroy']);

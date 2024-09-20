@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static create(array $attributes)
  * @method static whereId($id)
+ * @property string $role
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,5 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isUser(): string
+    {
+        return $this->role = 'user';
+    }
+    public function isAdmin(): string
+    {
+        return $this->role = 'admin';
     }
 }

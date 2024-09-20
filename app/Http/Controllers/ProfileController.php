@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +32,10 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      * @throws ValidationException
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         //
+        /** @var TYPE_NAME $attributes */
         $attributes = $request->validate([
             'current_password' => ['required'],
             'password' => ['required', Password::min(6), 'confirmed']
@@ -43,7 +45,7 @@ class ProfileController extends Controller
             throw ValidationException::withMessages([
                 'password' => 'Wrong password'
             ]);
-        };
+        }
 
         User::whereId(Auth::user()->id)->update([
             'password' => Hash::make($request->password)

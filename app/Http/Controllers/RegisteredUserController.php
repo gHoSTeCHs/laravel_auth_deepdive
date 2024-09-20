@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -27,6 +28,6 @@ class RegisteredUserController extends Controller
         $user = User::create($attributes);
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/profile');
     }
 }
