@@ -49,6 +49,6 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        dd('Password updated');
+        return back()->with('Success', 'Your password has been updated');
     }
 }

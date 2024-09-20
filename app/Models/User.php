@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static create(array $attributes)
+ * @method static whereId($id)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
